@@ -1,5 +1,5 @@
 CENTRO UNIVERSITÁRIO CATÓLICA DE SANTA CATARINA \
-[NOME DO CURSO]
+ENGENHARIA DE SOFTWARE
 
 MARCOS VINICIUS DA SILVA ZACCHI \
 YAN CARLOS FARIAS
@@ -18,7 +18,7 @@ YAN CARLOS FARIAS
 **CONSULTORIA DE QUALIDADE SOBRE O SISTEMA MY PARKING:** \
 planejamento, execução e cobertura de testes de software
 
-Trabalho final apresentado à disciplina de Qualidade de Software (Módulo 3: Testes de Software e Métricas) do curso de [NOME DO CURSO] do Centro Universitário Católica de Santa Catarina, como requisito parcial para a avaliação N3.
+Trabalho final apresentado à disciplina de Qualidade de Software (Módulo 3: Testes de Software e Métricas) do curso de Engenharia de Software do Centro Universitário Católica de Santa Catarina, como requisito parcial para a avaliação N3.
 
 Professora: Janaina [SOBRENOME]
 
