@@ -31,7 +31,7 @@ JOINVILLE \
 
 ## RESUMO
 
-Este trabalho apresenta uma consultoria de qualidade sobre o MY Parking, um sistema de gestão de estacionamento em microsserviços desenvolvido pela equipe na disciplina de Projeto e Arquitetura de Software. Foram escolhidas três funcionalidades ligadas à operação e ao faturamento: registro de entrada de veículos, cálculo da tarifa e pagamento com liberação da cancela. Para elas, foram escritos seis critérios de aceitação e montado um plano de testes por nível. Foram projetados e executados treze casos de teste pela API do sistema, com evidências registradas para cada execução. A cobertura dos critérios de aceitação passou de 66,7% para 100% com a criação de casos complementares, mas apenas 53,8% dos casos e 66,7% dos critérios foram aprovados. Foram registrados cinco bugs. Os dois críticos são a possibilidade de concluir a saída pagando um valor qualquer informado na requisição e a perda de todos os dados ao reiniciar os serviços, que guardam tudo em memória. O bug de gravidade alta é uma tarifa diferente da prometida na documentação. O trabalho conclui que cobrir todos os critérios não garante a ausência de defeitos e que o sistema ainda não está pronto para uso real. Ao cliente, recomenda-se calcular o valor a pagar apenas no servidor, adotar persistência em banco de dados, definir uma regra de tarifa única e criar uma suíte de testes automatizados.
+Este trabalho apresenta uma consultoria de qualidade sobre o MY Parking, um sistema de gestão de estacionamento em microsserviços desenvolvido pela equipe na disciplina de Projeto e Arquitetura de Software. Foram escolhidas três funcionalidades ligadas à operação e ao faturamento: registro de entrada de veículos, cálculo da tarifa e pagamento com liberação da cancela. Para elas, foram escritos seis critérios de aceitação e montado um plano de testes por nível. Foram projetados e executados treze casos de teste pela API do sistema, com evidências registradas para cada execução. A cobertura dos critérios de aceitação passou de 66,7% para 100% com a criação de casos complementares, mas apenas 53,8% dos casos e 66,7% dos critérios foram aprovados. Foram registrados cinco bugs. Os dois críticos são a possibilidade de concluir a saída pagando um valor qualquer informado na requisição e a perda de todos os dados ao reiniciar os serviços, que guardam tudo em memória. O bug de gravidade alta é uma tarifa diferente da prometida na documentação. O trabalho conclui que cobrir todos os critérios não garante a ausência de defeitos e que o sistema ainda não está pronto para uso real. À cliente, a professora Edicarcia, recomenda-se calcular o valor a pagar apenas no servidor, adotar persistência em banco de dados, definir uma regra de tarifa única e criar uma suíte de testes automatizados. A equipe fará essas correções para a entrega N3 do projeto, aplicando os dados e as ferramentas desta disciplina.
 
 **Palavras-chave:** qualidade de software; teste de software; critérios de aceitação; cobertura de testes; métricas de qualidade.
 
@@ -50,7 +50,7 @@ Quadro 8 – Registro de bugs \
 Quadro 9 – Decisão entre teste manual e automatizado \
 Quadro 10 – Matriz de cobertura dos critérios de aceitação \
 Quadro 11 – Painel de qualidade \
-Quadro 12 – Recomendações ao cliente \
+Quadro 12 – Recomendações à cliente \
 Quadro 13 – Registros antes e depois do reinício do sistema (CT-13)
 
 <!-- QUEBRA -->
@@ -85,14 +85,15 @@ Tabela 2 – Síntese dos resultados
 4.1.1 Casos complementares (criados na Ficha 3) \
 4.2 Registro de bugs \
 4.3 Manual ou automatizado? \
-5 FICHA 3 – COBERTURA DE TESTES E RECOMENDAÇÕES AO CLIENTE \
+5 FICHA 3 – COBERTURA DE TESTES E RECOMENDAÇÕES À CLIENTE \
 5.1 Cobertura dos critérios de aceitação \
 5.2 Reflexão \
 5.3 Painel de qualidade \
-5.4 Recomendações ao cliente \
+5.4 Recomendações à cliente \
 6 CONSIDERAÇÕES FINAIS \
 6.1 Síntese dos resultados \
 6.2 Aprendizados \
+6.3 Próximos passos \
 REFERÊNCIAS \
 APÊNDICE A – EXEMPLOS DE EVIDÊNCIAS DOS TESTES
 
@@ -102,11 +103,11 @@ APÊNDICE A – EXEMPLOS DE EVIDÊNCIAS DOS TESTES
 
 ### 1.1 Objetivo
 
-Este trabalho simula uma **consultoria de qualidade de software**. A equipe assumiu o papel de testadores e avaliou um sistema que ela mesma desenvolveu em outra disciplina, como se fosse entregá-lo a um cliente real. O objetivo foi responder a três perguntas:
+Este trabalho simula uma **consultoria de qualidade de software**. A equipe assumiu o papel de testadores e avaliou um sistema que ela mesma desenvolveu em outra disciplina, como se fosse entregá-lo a uma cliente real, papel assumido pela professora Edicarcia. O objetivo foi responder a três perguntas:
 
-1. O sistema faz o que foi prometido ao cliente?
+1. O sistema faz o que foi prometido à cliente?
 2. Os testes cobrem tudo o que foi prometido?
-3. O que o cliente deve corrigir primeiro, e como acompanhar a qualidade daqui para frente?
+3. O que a cliente deve corrigir primeiro, e como acompanhar a qualidade daqui para frente?
 
 ### 1.2 O sistema analisado
 
@@ -151,8 +152,8 @@ Fonte: elaborado pelos autores (2026).
 
 ### 2.2 Decisões tomadas
 
-- **Regra de tarifa.** A documentação do próprio projeto traz três regras diferentes. Adotamos como referência a regra do README (R$ 10,00 na 1ª hora + R$ 5,00 por hora ou fração, moto paga metade), porque é a que foi prometida ao cliente. O código cobra outra coisa, e essa diferença foi registrada como bug de gravidade Alta.
-- **Caminhão.** O cliente confirmou que o estacionamento só recebe carros e motos, pela mesma entrada. Por isso o caminhão, que o README cita, ficou fora dos critérios e dos testes.
+- **Regra de tarifa.** A documentação do próprio projeto traz três regras diferentes. Adotamos como referência a regra do README (R$ 10,00 na 1ª hora + R$ 5,00 por hora ou fração, moto paga metade), porque é a que foi prometida à cliente. O código cobra outra coisa, e essa diferença foi registrada como bug de gravidade Alta.
+- **Caminhão.** A cliente, professora Edicarcia, confirmou que o estacionamento só recebe carros e motos, pela mesma entrada. Por isso o caminhão, que o README cita, ficou fora dos critérios e dos testes.
 - **Nível dos testes.** Os testes foram executados chamando a API, pelo mesmo Gateway que a tela usa. Assim os resultados são exatos e podem ser repetidos. A tela foi usada para entender o fluxo e conferir quais dados ela envia.
 
 <!-- QUEBRA -->
@@ -176,9 +177,9 @@ Fonte: elaborado pelos autores (2026), com base em Zacchi e Farias (2026).
 
 Formato: **Dado** … **quando** … **então** …
 
-Regra de tarifa usada como referência: a que o **README do projeto (§4.3)** promete ao cliente. São R$ 10,00 pela 1ª hora, mais R$ 5,00 por hora ou fração excedente, com multiplicador por porte do veículo: carro 1,0× e moto 0,5×.
+Regra de tarifa usada como referência: a que o **README do projeto (§4.3)** promete à cliente. São R$ 10,00 pela 1ª hora, mais R$ 5,00 por hora ou fração excedente, com multiplicador por porte do veículo: carro 1,0× e moto 0,5×.
 
-**Regra do cliente:** o estacionamento recebe só **carros e motos**, pela mesma entrada. Caminhão não entra. Por isso o multiplicador de caminhão (2,0×), que o README cita, ficou fora dos critérios.
+**Regra da cliente:** o estacionamento recebe só **carros e motos**, pela mesma entrada. Caminhão não entra. Por isso o multiplicador de caminhão (2,0×), que o README cita, ficou fora dos critérios.
 
 #### 3.2.1 F1 – Registro de entrada de veículo
 
@@ -202,11 +203,11 @@ Regra de tarifa usada como referência: a que o **README do projeto (§4.3)** pr
 
 **Quadro 3 – Plano de testes por nível**
 
-| Funcionalidade | Unidade (uma função sozinha) | Integração (tela e banco, sistema e API) | Sistema (o sistema inteiro, como o usuário usa) | Aceitação (cliente confere os critérios) |
+| Funcionalidade | Unidade (uma função sozinha) | Integração (tela e banco, sistema e API) | Sistema (o sistema inteiro, como o usuário usa) | Aceitação (a cliente confere os critérios) |
 |---|---|---|---|---|
-| F1 | `AvaliadorAcessoContext.avaliar()`: sem mensalista vira `ROTATIVO`; mensalista `EM_DIA` vira `MENSALISTA`; mensalista bloqueado tem a entrada negada. `Movimentacao.validar()`: placa vazia. | `estacionamento-service` consultando o `mensalista-service` por placa (`MensalistaClient`), incluindo o caso de o serviço de mensalistas estar fora do ar. Chamada `POST /entradas` pelo Gateway com token JWT. Entrada duplicada retornando 409. | No navegador: login → tela Entrada → digitar placa → conferir o comprovante e o veículo aparecendo no Dashboard. Testar placa inválida, placa vazia e placa repetida. | O cliente registra a entrada de um carro avulso e de um mensalista e confere F1-C1 e F1-C2. |
-| F2 | `TarifaPadraoStrategy.calcular()` (a estratégia que está ativa) com valores de limite: 60, 61 e 130 minutos, para carro e para moto, além de valor negativo e texto no lugar de número. `Movimentacao.calcularPermanenciaMinutos()`. | `POST /pagamentos/calcular` pelo Gateway: o `estacionamento-service` envia a permanência e o `pagamento-service` devolve o valor. Conferir se o valor mostrado na tela é o mesmo que o back-end calculou. | No navegador: registrar a entrada → ir em Saída → conferir tempo e valor. Para o tempo passar, usar os veículos de exemplo que o sistema já cria com entrada antiga. | O cliente confere a tabela de exemplos de F2-C1 e F2-C2. |
-| F3 | `DinheiroProcessor.processar()`: troco exato, troco zero e valor insuficiente. Validação do cartão (Luhn) e geração do payload PIX. `EstacionamentoService.registrarSaida()` com o `PagamentoClient` simulado (mock). | `estacionamento-service` ↔ `pagamento-service`: a saída consulta `GET /pagamentos/movimentacao/:id` e só libera com `CONFIRMADO`. PIX `PENDENTE` → confirmar → saída liberada. | Fluxo completo no navegador: entrada → saída → pagar em dinheiro, cartão e PIX → cancela liberada → recibo em PDF. Tentar sair sem pagar. | O cliente faz uma saída paga em dinheiro e uma sem pagamento, e confere F3-C1 e F3-C2. |
+| F1 | `AvaliadorAcessoContext.avaliar()`: sem mensalista vira `ROTATIVO`; mensalista `EM_DIA` vira `MENSALISTA`; mensalista bloqueado tem a entrada negada. `Movimentacao.validar()`: placa vazia. | `estacionamento-service` consultando o `mensalista-service` por placa (`MensalistaClient`), incluindo o caso de o serviço de mensalistas estar fora do ar. Chamada `POST /entradas` pelo Gateway com token JWT. Entrada duplicada retornando 409. | No navegador: login → tela Entrada → digitar placa → conferir o comprovante e o veículo aparecendo no Dashboard. Testar placa inválida, placa vazia e placa repetida. | A cliente registra a entrada de um carro avulso e de um mensalista e confere F1-C1 e F1-C2. |
+| F2 | `TarifaPadraoStrategy.calcular()` (a estratégia que está ativa) com valores de limite: 60, 61 e 130 minutos, para carro e para moto, além de valor negativo e texto no lugar de número. `Movimentacao.calcularPermanenciaMinutos()`. | `POST /pagamentos/calcular` pelo Gateway: o `estacionamento-service` envia a permanência e o `pagamento-service` devolve o valor. Conferir se o valor mostrado na tela é o mesmo que o back-end calculou. | No navegador: registrar a entrada → ir em Saída → conferir tempo e valor. Para o tempo passar, usar os veículos de exemplo que o sistema já cria com entrada antiga. | A cliente confere a tabela de exemplos de F2-C1 e F2-C2. |
+| F3 | `DinheiroProcessor.processar()`: troco exato, troco zero e valor insuficiente. Validação do cartão (Luhn) e geração do payload PIX. `EstacionamentoService.registrarSaida()` com o `PagamentoClient` simulado (mock). | `estacionamento-service` ↔ `pagamento-service`: a saída consulta `GET /pagamentos/movimentacao/:id` e só libera com `CONFIRMADO`. PIX `PENDENTE` → confirmar → saída liberada. | Fluxo completo no navegador: entrada → saída → pagar em dinheiro, cartão e PIX → cancela liberada → recibo em PDF. Tentar sair sem pagar. | A cliente faz uma saída paga em dinheiro e uma sem pagamento, e confere F3-C1 e F3-C2. |
 
 Fonte: elaborado pelos autores (2026).
 
@@ -237,13 +238,13 @@ A **F2** vem logo atrás porque a regra de tarifa não está clara nos documento
 
 | Fonte | O que diz |
 |---|---|
-| README §4.3 (regra adotada nos critérios) | R$ 10,00 na 1ª hora + R$ 5,00 por hora ou fração adicional, com multiplicador por porte (moto 0,5×). O README também cita caminhão (2,0×) e vagas de caminhão, que o cliente não usa. |
+| README §4.3 (regra adotada nos critérios) | R$ 10,00 na 1ª hora + R$ 5,00 por hora ou fração adicional, com multiplicador por porte (moto 0,5×). O README também cita caminhão (2,0×) e vagas de caminhão, que a cliente não usa. |
 | Entrega N1 (RN-06) e código ativo (`TarifaPadraoStrategy`) | R$ 8,00 por hora ou fração, 10 min de carência, sem porte. O sistema nem registra o porte na entrada. |
 | `docs/api-contracts.md` | exemplo de 150 min = R$ 25,00, valor que nenhuma das duas regras produz |
 
 Fonte: elaborado pelos autores (2026), com base em Zacchi e Farias (2026).
 
-Como o cliente recebeu a promessa do README, a cobrança feita pelo código é tratada como **bug de gravidade Alta** (resultado errado) na Ficha 2.
+Como a cliente recebeu a promessa do README, a cobrança feita pelo código é tratada como **bug de gravidade Alta** (resultado errado) na Ficha 2.
 
 <!-- QUEBRA -->
 
@@ -280,7 +281,7 @@ Os casos CT-11 e CT-12 foram criados para os critérios que ficaram sem cobertur
 
 | ID | Funcionalidade | Pré-condição | Passos | Dados de entrada | Resultado esperado | Resultado obtido | Passou? |
 |---|---|---|---|---|---|---|---|
-| CT-11 | F2 – Tarifa de moto | Operador logado. Caminhão não é testado porque o cliente não recebe caminhões. | Enviar `POST /pagamentos/calcular` duas vezes, informando `tipoVeiculo` = `MOTO`. | moto, permanência = 61 min e permanência = 130 min | 61 min: R$ 7,50 (0,5 × R$ 15,00). 130 min: R$ 10,00 (0,5 × R$ 20,00). | **R$ 8,00 e R$ 16,00, os mesmos valores de um carro.** O porte é ignorado, e a entrada (`POST /entradas`) nem tem campo para dizer se é carro ou moto. | **Não** |
+| CT-11 | F2 – Tarifa de moto | Operador logado. Caminhão não é testado porque a cliente não recebe caminhões. | Enviar `POST /pagamentos/calcular` duas vezes, informando `tipoVeiculo` = `MOTO`. | moto, permanência = 61 min e permanência = 130 min | 61 min: R$ 7,50 (0,5 × R$ 15,00). 130 min: R$ 10,00 (0,5 × R$ 20,00). | **R$ 8,00 e R$ 16,00, os mesmos valores de um carro.** O porte é ignorado, e a entrada (`POST /entradas`) nem tem campo para dizer se é carro ou moto. | **Não** |
 | CT-12 | F3 – PIX pendente | Sistema recém-iniciado. `ABC1D23` (mov. 1002) há 45 min no pátio, sem pagamento. | 1. Gerar a cobrança PIX (`iniciarPix: true`). 2. Tentar a saída. 3. Confirmar o PIX. 4. Tentar a saída de novo. | mov. = `1002`, forma = `PIX` | Passo 2: HTTP 402, pedindo a confirmação do PIX. Passo 4: HTTP 200, saída `FINALIZADA`. | Passo 1: PIX `PENDENTE`. Passo 2: HTTP 402, "Para liberar a saída, confirme primeiro o recebimento do pagamento PIX". Passo 4: HTTP 200, `FINALIZADA`. Obs.: o valor cobrado foi R$ 8,00 em vez de R$ 10,00 (BUG-02). | Sim |
 | CT-13 | Todas – Persistência | CT-01 a CT-10 executados (entrada `BRA2E19`, placa `12@` e pagamentos de CT-07 e CT-10 gravados). Lista de entradas e pagamentos registrada antes do reinício. | 1. Parar todos os serviços. 2. Iniciar de novo (`node iniciar.js`). 3. Listar entradas e pagamentos. | — | Os registros feitos antes do reinício continuam lá. O README diz que cada serviço grava em SQLite. | **Todos os registros sumiram.** Só restaram os dados de exemplo que o sistema cria ao iniciar (3 veículos e 1 pagamento), além do pagamento do CT-12, feito depois do reinício. | **Não** |
 
@@ -332,7 +333,7 @@ Fonte: elaborado pelos autores (2026).
 
 <!-- QUEBRA -->
 
-## 5 FICHA 3 – COBERTURA DE TESTES E RECOMENDAÇÕES AO CLIENTE
+## 5 FICHA 3 – COBERTURA DE TESTES E RECOMENDAÇÕES À CLIENTE
 
 ### 5.1 Cobertura dos critérios de aceitação
 
@@ -388,7 +389,7 @@ Cobertura alta não quer dizer sistema aprovado. Todos os critérios estão test
 
    - **Cobertura de critérios não é ausência de bugs.** Cada critério foi verificado com poucos valores, e testes só mostram a presença de defeitos, nunca a ausência (DIJKSTRA, 1972). O BUG-01 (pagar R$ 0,01 e sair) está dentro da F3, mas os testes "normais" do critério passavam. Ele só apareceu quando tentamos usar o sistema de um jeito que o critério não descrevia.
    - **Também existem requisitos que nenhum critério cobre.** É o caso da persistência dos dados (BUG-05) e da validação no back-end (BUG-03 e BUG-04).
-   - **Cobertura de critérios não é cobertura de código.** Os critérios dizem o que o cliente pediu, não quais linhas foram executadas. Nada testou a validação de cartão (algoritmo de Luhn), os relatórios em PDF e Excel, a gestão de vagas, os mensalistas ou o login. Medir a cobertura de código exige uma ferramenta própria (por exemplo, `jest --coverage` ou `c8`), que mostra quais linhas e desvios (`if`/`else`) foram executados. E mesmo 100% de linhas executadas não garante que os resultados foram conferidos.
+   - **Cobertura de critérios não é cobertura de código.** Os critérios dizem o que a cliente pediu, não quais linhas foram executadas. Nada testou a validação de cartão (algoritmo de Luhn), os relatórios em PDF e Excel, a gestão de vagas, os mensalistas ou o login. Medir a cobertura de código exige uma ferramenta própria (por exemplo, `jest --coverage` ou `c8`), que mostra quais linhas e desvios (`if`/`else`) foram executados. E mesmo 100% de linhas executadas não garante que os resultados foram conferidos.
 
 ### 5.3 Painel de qualidade
 
@@ -397,23 +398,23 @@ Cobertura alta não quer dizer sistema aprovado. Todos os critérios estão test
 | Indicador | Valor atual | Meta | Com que frequência medir | Alerta: o que fazer se piorar |
 |---|---|---|---|---|
 | Cobertura dos critérios de aceitação (critérios com caso de teste ÷ total) | 100% (6/6). Era 66,7% antes do CT-11 e do CT-12. | 100% | A cada nova funcionalidade ou alteração de critério | Abaixo de 100%: a funcionalidade não é entregue até ganhar os casos que faltam. |
-| Taxa de aprovação dos casos de teste (casos que passaram ÷ executados) | 53,8% (7/13) | ≥ 95% antes de cada entrega ao cliente | A cada versão (a cada merge na `main`) | Abaixo de 95%: bloquear a entrega e fazer a triagem dos casos que falharam no mesmo dia. |
-| Bugs abertos de gravidade Crítica ou Alta | 3 (BUG-01, BUG-05 Críticos e BUG-02 Alto) | 0 | Semanal, e sempre que surgir um bug novo | Qualquer Crítico novo para o desenvolvimento das outras tarefas até ser corrigido. Alto sem correção em 1 semana vira assunto da reunião com o cliente. |
-| Critérios de aceitação aprovados (cobertos e passando ÷ total) | 66,7% (4/6) | 100% | A cada entrega | Abaixo de 100%: avisar o cliente quais regras ainda não funcionam antes da entrega, sem esconder. |
+| Taxa de aprovação dos casos de teste (casos que passaram ÷ executados) | 53,8% (7/13) | ≥ 95% antes de cada entrega à cliente | A cada versão (a cada merge na `main`) | Abaixo de 95%: bloquear a entrega e fazer a triagem dos casos que falharam no mesmo dia. |
+| Bugs abertos de gravidade Crítica ou Alta | 3 (BUG-01, BUG-05 Críticos e BUG-02 Alto) | 0 | Semanal, e sempre que surgir um bug novo | Qualquer Crítico novo para o desenvolvimento das outras tarefas até ser corrigido. Alto sem correção em 1 semana vira assunto da reunião com a cliente. |
+| Critérios de aceitação aprovados (cobertos e passando ÷ total) | 66,7% (4/6) | 100% | A cada entrega | Abaixo de 100%: avisar a cliente quais regras ainda não funcionam antes da entrega, sem esconder. |
 | Casos de teste automatizados no repositório do projeto | 0% (0 de 13; nenhum serviço tem script `test`) | ≥ 70% até a próxima entrega e 100% dos casos de regras de dinheiro (F2 e F3) | Semanal | Se o número parar de subir: nenhum pull request entra sem teste automatizado da parte alterada. |
 | Regras de negócio com documentação divergente do código | 1 regra (tarifa) com 3 versões diferentes (README, N1 e `api-contracts.md`) | 0 | A cada entrega | Divergência nova: o dono do produto decide qual é a regra oficial antes de qualquer correção de código. |
 
 Fonte: elaborado pelos autores (2026).
 
-### 5.4 Recomendações ao cliente
+### 5.4 Recomendações à cliente
 
-**Quadro 12 – Recomendações ao cliente**
+**Quadro 12 – Recomendações à cliente**
 
 | Prioridade | Recomendação | Motivo (qual bug, métrica ou risco justifica) |
 |---|---|---|
 | 1 | **Calcular o valor a pagar só no back-end.** O `pagamento-service` deve buscar o horário de entrada no `estacionamento-service` e ignorar `valor` e `permanenciaMinutos` vindos do cliente. A saída só libera se o valor pago cobrir o valor devido. | **BUG-01 (Crítica):** um carro com 47 min de pátio saiu pagando R$ 0,01 (CT-10). É prejuízo financeiro direto, e qualquer operador com acesso à API consegue fazer isso. |
 | 2 | **Trocar os repositórios em memória pelo banco SQLite** que o README já promete, com um banco por serviço. | **BUG-05 (Crítica):** um reinício apaga entradas, pagamentos e mensalistas (CT-13). Uma queda de energia no meio do expediente faria perder o caixa do dia e deixaria carros "presos" sem registro. |
-| 3 | **Definir com o cliente uma única regra de tarifa e corrigir o código.** A regra do README é R$ 10,00 + R$ 5,00/h, com moto pagando metade. Para isso, a entrada precisa registrar se o veículo é carro ou moto. Depois, atualizar o README, o `api-contracts.md` e retirar a menção a caminhão, que o cliente não recebe. | **BUG-02 (Alta):** 61 min custam R$ 8,00 em vez de R$ 15,00 para carro e R$ 7,50 para moto (CT-05, CT-11). Indicadores "critérios aprovados = 66,7%" e "documentação divergente = 1 regra com 3 versões". |
+| 3 | **Definir com a cliente uma única regra de tarifa e corrigir o código.** A regra do README é R$ 10,00 + R$ 5,00/h, com moto pagando metade. Para isso, a entrada precisa registrar se o veículo é carro ou moto. Depois, atualizar o README, o `api-contracts.md` e retirar a menção a caminhão, que a cliente não recebe. | **BUG-02 (Alta):** 61 min custam R$ 8,00 em vez de R$ 15,00 para carro e R$ 7,50 para moto (CT-05, CT-11). Indicadores "critérios aprovados = 66,7%" e "documentação divergente = 1 regra com 3 versões". |
 | 4 | **Validar os dados no back-end, e não só na tela:** placa nos padrões `ABC1234` e `ABC1D23`; permanência numérica e maior que zero. | **BUG-04 e BUG-03 (Médias):** placa `12@` aceita (CT-04); permanência `-30` e `"abc"` viram R$ 0,00 (CT-06). |
 | 5 | **Criar a suíte de testes automatizados** (Jest + Supertest), começando pelos 13 casos marcados como "automatizar" na Ficha 2, e rodar em toda alteração (GitHub Actions). Os CT-05, CT-10, CT-11 e CT-13 entram como testes de regressão dos bugs corrigidos. | Indicador "casos automatizados = 0%" e "taxa de aprovação = 53,8%". Sem testes automáticos, cada correção pode quebrar outra regra sem ninguém perceber. |
 
@@ -446,15 +447,25 @@ Os achados mais importantes foram:
 2. **Perda de todos os dados ao reiniciar (BUG-05, Crítica).** O README promete banco SQLite, mas o código guarda tudo em memória. Um reinício apaga entradas, pagamentos e mensalistas.
 3. **Tarifa diferente da prometida (BUG-02, Alta).** O sistema cobra R$ 8,00 por hora e não diferencia carro de moto. Pela regra prometida, uma hora e um minuto de carro custaria R$ 15,00, e de moto, R$ 7,50.
 
-O MY Parking tem uma boa base de arquitetura: microsserviços, padrões de projeto e regras separadas em classes. Mesmo assim, **ele ainda não está pronto para operar com dinheiro de verdade.** Os dois bugs críticos precisam ser corrigidos antes de qualquer uso real, e a regra de tarifa precisa ser definida com o cliente e corrigida no código.
+O MY Parking tem uma boa base de arquitetura: microsserviços, padrões de projeto e regras separadas em classes. Mesmo assim, **ele ainda não está pronto para operar com dinheiro de verdade.** Os dois bugs críticos precisam ser corrigidos antes de qualquer uso real, e a regra de tarifa precisa ser definida com a cliente e corrigida no código.
 
 ### 6.2 Aprendizados
 
-1. **Documentação também precisa ser testada.** A mesma regra de tarifa aparecia de três jeitos diferentes nos documentos do projeto. Antes de testar, é preciso saber qual regra vale, e quem decide isso é o cliente.
+1. **Documentação também precisa ser testada.** A mesma regra de tarifa aparecia de três jeitos diferentes nos documentos do projeto. Antes de testar, é preciso saber qual regra vale, e quem decide isso é a cliente.
 2. **Testar só pela tela esconde problemas.** A tela envia os dados certos, então pelo navegador o sistema parecia correto. O BUG-01 só apareceu chamando a API diretamente. Validação que existe só no front-end não protege o sistema.
 3. **Tendemos a testar o "caso padrão".** Todos os primeiros casos usaram carro, e a moto ficou de fora. Também testamos "pagou" e "não pagou", e esquecemos o "pagamento pendente". A matriz de cobertura da Ficha 3 foi o que revelou essas lacunas.
 4. **Cobertura de critérios e qualidade são coisas diferentes.** Chegamos a 100% de cobertura com apenas 66,7% dos critérios funcionando, e com bugs graves fora de qualquer critério. Cobertura mostra o que foi testado, não o que está certo.
 5. **Desenvolvemos um sistema sem nenhum teste automatizado.** Ao assumir o papel de consultores do nosso próprio projeto, percebemos que cada correção feita sem testes automáticos pode quebrar outra regra sem ninguém notar. Por isso a criação da suíte automatizada está entre as recomendações.
+
+### 6.3 Próximos passos
+
+A equipe vai corrigir o MY Parking para a entrega N3 do projeto, na disciplina de Projeto e Arquitetura de Software. As correções vão usar os dados levantados neste relatório e as ferramentas aprendidas na disciplina de Qualidade de Software:
+
+1. **Corrigir os bugs na ordem das recomendações** (subseção 5.4). Primeiro os críticos: o valor a pagar calculado só no servidor (BUG-01) e a gravação dos dados em banco (BUG-05). Em seguida, a tarifa (BUG-02), depois de confirmar a regra com a cliente, professora Edicarcia. Por fim, as validações de placa e de permanência (BUG-03 e BUG-04).
+2. **Transformar os 13 casos de teste em testes automatizados**, começando pelos que comprovam os bugs. Assim cada correção já sai com um teste que impede o bug de voltar.
+3. **Executar de novo todos os casos depois das correções**, para conferir os critérios de aceitação e registrar os novos resultados.
+4. **Acompanhar o painel de qualidade** (subseção 5.3) até atingir as metas: 100% dos critérios aprovados, nenhum bug crítico ou alto aberto e pelo menos 70% dos casos automatizados.
+5. **Alinhar a documentação ao código**, deixando uma única regra de tarifa no README e no `api-contracts.md`.
 
 <!-- QUEBRA -->
 

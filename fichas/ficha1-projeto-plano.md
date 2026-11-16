@@ -15,9 +15,9 @@
 
 Formato: **Dado** … **quando** … **então** …
 
-Regra de tarifa usada como referência: a que o **README do projeto (§4.3)** promete ao cliente. São R$ 10,00 pela 1ª hora, mais R$ 5,00 por hora ou fração excedente, com multiplicador por porte do veículo: carro 1,0× e moto 0,5×.
+Regra de tarifa usada como referência: a que o **README do projeto (§4.3)** promete à cliente. São R$ 10,00 pela 1ª hora, mais R$ 5,00 por hora ou fração excedente, com multiplicador por porte do veículo: carro 1,0× e moto 0,5×.
 
-**Regra do cliente:** o estacionamento recebe só **carros e motos**, pela mesma entrada. Caminhão não entra. Por isso o multiplicador de caminhão (2,0×), que o README cita, ficou fora dos critérios.
+**Regra da cliente (professora Edicarcia):** o estacionamento recebe só **carros e motos**, pela mesma entrada. Caminhão não entra. Por isso o multiplicador de caminhão (2,0×), que o README cita, ficou fora dos critérios.
 
 ### F1 – Registro de entrada de veículo
 
@@ -39,11 +39,11 @@ Regra de tarifa usada como referência: a que o **README do projeto (§4.3)** pr
 
 ## C. Plano de testes por nível
 
-| Funcionalidade | Unidade (uma função sozinha) | Integração (tela e banco, sistema e API) | Sistema (o sistema inteiro, como o usuário usa) | Aceitação (cliente confere os critérios) |
+| Funcionalidade | Unidade (uma função sozinha) | Integração (tela e banco, sistema e API) | Sistema (o sistema inteiro, como o usuário usa) | Aceitação (a cliente confere os critérios) |
 |---|---|---|---|---|
-| F1 | `AvaliadorAcessoContext.avaliar()`: sem mensalista vira `ROTATIVO`; mensalista `EM_DIA` vira `MENSALISTA`; mensalista bloqueado tem a entrada negada. `Movimentacao.validar()`: placa vazia. | `estacionamento-service` consultando o `mensalista-service` por placa (`MensalistaClient`), incluindo o caso de o serviço de mensalistas estar fora do ar. Chamada `POST /entradas` pelo Gateway com token JWT. Entrada duplicada retornando 409. | No navegador: login → tela Entrada → digitar placa → conferir o comprovante e o veículo aparecendo no Dashboard. Testar placa inválida, placa vazia e placa repetida. | O cliente registra a entrada de um carro avulso e de um mensalista e confere F1-C1 e F1-C2. |
-| F2 | `TarifaPadraoStrategy.calcular()` (a estratégia que está ativa) com valores de limite: 60, 61 e 130 minutos, para carro e para moto, além de valor negativo e texto no lugar de número. `Movimentacao.calcularPermanenciaMinutos()`. | `POST /pagamentos/calcular` pelo Gateway: o `estacionamento-service` envia a permanência e o `pagamento-service` devolve o valor. Conferir se o valor mostrado na tela é o mesmo que o back-end calculou. | No navegador: registrar a entrada → ir em Saída → conferir tempo e valor. Para o tempo passar, usar os veículos de exemplo que o sistema já cria com entrada antiga. | O cliente confere a tabela de exemplos de F2-C1 e F2-C2. |
-| F3 | `DinheiroProcessor.processar()`: troco exato, troco zero e valor insuficiente. Validação do cartão (Luhn) e geração do payload PIX. `EstacionamentoService.registrarSaida()` com o `PagamentoClient` simulado (mock). | `estacionamento-service` ↔ `pagamento-service`: a saída consulta `GET /pagamentos/movimentacao/:id` e só libera com `CONFIRMADO`. PIX `PENDENTE` → confirmar → saída liberada. | Fluxo completo no navegador: entrada → saída → pagar em dinheiro, cartão e PIX → cancela liberada → recibo em PDF. Tentar sair sem pagar. | O cliente faz uma saída paga em dinheiro e uma sem pagamento, e confere F3-C1 e F3-C2. |
+| F1 | `AvaliadorAcessoContext.avaliar()`: sem mensalista vira `ROTATIVO`; mensalista `EM_DIA` vira `MENSALISTA`; mensalista bloqueado tem a entrada negada. `Movimentacao.validar()`: placa vazia. | `estacionamento-service` consultando o `mensalista-service` por placa (`MensalistaClient`), incluindo o caso de o serviço de mensalistas estar fora do ar. Chamada `POST /entradas` pelo Gateway com token JWT. Entrada duplicada retornando 409. | No navegador: login → tela Entrada → digitar placa → conferir o comprovante e o veículo aparecendo no Dashboard. Testar placa inválida, placa vazia e placa repetida. | A cliente registra a entrada de um carro avulso e de um mensalista e confere F1-C1 e F1-C2. |
+| F2 | `TarifaPadraoStrategy.calcular()` (a estratégia que está ativa) com valores de limite: 60, 61 e 130 minutos, para carro e para moto, além de valor negativo e texto no lugar de número. `Movimentacao.calcularPermanenciaMinutos()`. | `POST /pagamentos/calcular` pelo Gateway: o `estacionamento-service` envia a permanência e o `pagamento-service` devolve o valor. Conferir se o valor mostrado na tela é o mesmo que o back-end calculou. | No navegador: registrar a entrada → ir em Saída → conferir tempo e valor. Para o tempo passar, usar os veículos de exemplo que o sistema já cria com entrada antiga. | A cliente confere a tabela de exemplos de F2-C1 e F2-C2. |
+| F3 | `DinheiroProcessor.processar()`: troco exato, troco zero e valor insuficiente. Validação do cartão (Luhn) e geração do payload PIX. `EstacionamentoService.registrarSaida()` com o `PagamentoClient` simulado (mock). | `estacionamento-service` ↔ `pagamento-service`: a saída consulta `GET /pagamentos/movimentacao/:id` e só libera com `CONFIRMADO`. PIX `PENDENTE` → confirmar → saída liberada. | Fluxo completo no navegador: entrada → saída → pagar em dinheiro, cartão e PIX → cancela liberada → recibo em PDF. Tentar sair sem pagar. | A cliente faz uma saída paga em dinheiro e uma sem pagamento, e confere F3-C1 e F3-C2. |
 
 ### Ambiente, ferramentas e escopo dos testes
 
@@ -66,8 +66,8 @@ A **F2** vem logo atrás porque a regra de tarifa não está clara nos documento
 
 | Fonte | O que diz |
 |---|---|
-| README §4.3 (regra adotada nos critérios) | R$ 10,00 na 1ª hora + R$ 5,00 por hora ou fração adicional, com multiplicador por porte (moto 0,5×). O README também cita caminhão (2,0×) e vagas de caminhão, que o cliente não usa. |
+| README §4.3 (regra adotada nos critérios) | R$ 10,00 na 1ª hora + R$ 5,00 por hora ou fração adicional, com multiplicador por porte (moto 0,5×). O README também cita caminhão (2,0×) e vagas de caminhão, que a cliente não usa. |
 | Entrega N1 (RN-06) e código ativo (`TarifaPadraoStrategy`) | R$ 8,00 por hora ou fração, 10 min de carência, sem porte. O sistema nem registra o porte na entrada. |
 | `docs/api-contracts.md` | exemplo de 150 min = R$ 25,00, valor que nenhuma das duas regras produz |
 
-Como o cliente recebeu a promessa do README, a cobrança feita pelo código é tratada como **bug de gravidade Alta** (resultado errado) na Ficha 2.
+Como a cliente recebeu a promessa do README, a cobrança feita pelo código é tratada como **bug de gravidade Alta** (resultado errado) na Ficha 2.

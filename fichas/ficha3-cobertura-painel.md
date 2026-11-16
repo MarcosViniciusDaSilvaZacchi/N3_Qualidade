@@ -1,4 +1,4 @@
-# Ficha 3 · Cobertura de testes e recomendações ao cliente
+# Ficha 3 · Cobertura de testes e recomendações à cliente
 
 ## A. Cobertura dos critérios de aceitação
 
@@ -46,7 +46,7 @@ Cobertura alta não quer dizer sistema aprovado. Todos os critérios estão test
 
    - **Cobertura de critérios não é ausência de bugs.** Cada critério foi verificado com poucos valores, e testes só mostram a presença de defeitos, nunca a ausência (DIJKSTRA, 1972). O BUG-01 (pagar R$ 0,01 e sair) está dentro da F3, mas os testes "normais" do critério passavam. Ele só apareceu quando tentamos usar o sistema de um jeito que o critério não descrevia.
    - **Também existem requisitos que nenhum critério cobre.** É o caso da persistência dos dados (BUG-05) e da validação no back-end (BUG-03 e BUG-04).
-   - **Cobertura de critérios não é cobertura de código.** Os critérios dizem o que o cliente pediu, não quais linhas foram executadas. Nada testou a validação de cartão (algoritmo de Luhn), os relatórios em PDF e Excel, a gestão de vagas, os mensalistas ou o login. Medir a cobertura de código exige uma ferramenta própria (por exemplo, `jest --coverage` ou `c8`), que mostra quais linhas e desvios (`if`/`else`) foram executados. E mesmo 100% de linhas executadas não garante que os resultados foram conferidos.
+   - **Cobertura de critérios não é cobertura de código.** Os critérios dizem o que a cliente pediu, não quais linhas foram executadas. Nada testou a validação de cartão (algoritmo de Luhn), os relatórios em PDF e Excel, a gestão de vagas, os mensalistas ou o login. Medir a cobertura de código exige uma ferramenta própria (por exemplo, `jest --coverage` ou `c8`), que mostra quais linhas e desvios (`if`/`else`) foram executados. E mesmo 100% de linhas executadas não garante que os resultados foram conferidos.
 
 ## C. Painel de qualidade
 
@@ -55,18 +55,18 @@ Cobertura alta não quer dizer sistema aprovado. Todos os critérios estão test
 | Indicador | Valor atual | Meta | Com que frequência medir | Alerta: o que fazer se piorar |
 |---|---|---|---|---|
 | Cobertura dos critérios de aceitação (critérios com caso de teste ÷ total) | 100% (6/6). Era 66,7% antes do CT-11 e do CT-12. | 100% | A cada nova funcionalidade ou alteração de critério | Abaixo de 100%: a funcionalidade não é entregue até ganhar os casos que faltam. |
-| Taxa de aprovação dos casos de teste (casos que passaram ÷ executados) | 53,8% (7/13) | ≥ 95% antes de cada entrega ao cliente | A cada versão (a cada merge na `main`) | Abaixo de 95%: bloquear a entrega e fazer a triagem dos casos que falharam no mesmo dia. |
-| Bugs abertos de gravidade Crítica ou Alta | 3 (BUG-01, BUG-05 Críticos e BUG-02 Alto) | 0 | Semanal, e sempre que surgir um bug novo | Qualquer Crítico novo para o desenvolvimento das outras tarefas até ser corrigido. Alto sem correção em 1 semana vira assunto da reunião com o cliente. |
-| Critérios de aceitação aprovados (cobertos e passando ÷ total) | 66,7% (4/6) | 100% | A cada entrega | Abaixo de 100%: avisar o cliente quais regras ainda não funcionam antes da entrega, sem esconder. |
+| Taxa de aprovação dos casos de teste (casos que passaram ÷ executados) | 53,8% (7/13) | ≥ 95% antes de cada entrega à cliente | A cada versão (a cada merge na `main`) | Abaixo de 95%: bloquear a entrega e fazer a triagem dos casos que falharam no mesmo dia. |
+| Bugs abertos de gravidade Crítica ou Alta | 3 (BUG-01, BUG-05 Críticos e BUG-02 Alto) | 0 | Semanal, e sempre que surgir um bug novo | Qualquer Crítico novo para o desenvolvimento das outras tarefas até ser corrigido. Alto sem correção em 1 semana vira assunto da reunião com a cliente. |
+| Critérios de aceitação aprovados (cobertos e passando ÷ total) | 66,7% (4/6) | 100% | A cada entrega | Abaixo de 100%: avisar a cliente quais regras ainda não funcionam antes da entrega, sem esconder. |
 | Casos de teste automatizados no repositório do projeto | 0% (0 de 13; nenhum serviço tem script `test`) | ≥ 70% até a próxima entrega e 100% dos casos de regras de dinheiro (F2 e F3) | Semanal | Se o número parar de subir: nenhum pull request entra sem teste automatizado da parte alterada. |
 | Regras de negócio com documentação divergente do código | 1 regra (tarifa) com 3 versões diferentes (README, N1 e `api-contracts.md`) | 0 | A cada entrega | Divergência nova: o dono do produto decide qual é a regra oficial antes de qualquer correção de código. |
 
-## D. Recomendações ao cliente
+## D. Recomendações à cliente
 
 | Prioridade | Recomendação | Motivo (qual bug, métrica ou risco justifica) |
 |---|---|---|
 | 1 | **Calcular o valor a pagar só no back-end.** O `pagamento-service` deve buscar o horário de entrada no `estacionamento-service` e ignorar `valor` e `permanenciaMinutos` vindos do cliente. A saída só libera se o valor pago cobrir o valor devido. | **BUG-01 (Crítica):** um carro com 47 min de pátio saiu pagando R$ 0,01 (CT-10). É prejuízo financeiro direto, e qualquer operador com acesso à API consegue fazer isso. |
 | 2 | **Trocar os repositórios em memória pelo banco SQLite** que o README já promete, com um banco por serviço. | **BUG-05 (Crítica):** um reinício apaga entradas, pagamentos e mensalistas (CT-13). Uma queda de energia no meio do expediente faria perder o caixa do dia e deixaria carros "presos" sem registro. |
-| 3 | **Definir com o cliente uma única regra de tarifa e corrigir o código.** A regra do README é R$ 10,00 + R$ 5,00/h, com moto pagando metade. Para isso, a entrada precisa registrar se o veículo é carro ou moto. Depois, atualizar o README, o `api-contracts.md` e retirar a menção a caminhão, que o cliente não recebe. | **BUG-02 (Alta):** 61 min custam R$ 8,00 em vez de R$ 15,00 para carro e R$ 7,50 para moto (CT-05, CT-11). Indicadores "critérios aprovados = 66,7%" e "documentação divergente = 1 regra com 3 versões". |
+| 3 | **Definir com a cliente uma única regra de tarifa e corrigir o código.** A regra do README é R$ 10,00 + R$ 5,00/h, com moto pagando metade. Para isso, a entrada precisa registrar se o veículo é carro ou moto. Depois, atualizar o README, o `api-contracts.md` e retirar a menção a caminhão, que a cliente não recebe. | **BUG-02 (Alta):** 61 min custam R$ 8,00 em vez de R$ 15,00 para carro e R$ 7,50 para moto (CT-05, CT-11). Indicadores "critérios aprovados = 66,7%" e "documentação divergente = 1 regra com 3 versões". |
 | 4 | **Validar os dados no back-end, e não só na tela:** placa nos padrões `ABC1234` e `ABC1D23`; permanência numérica e maior que zero. | **BUG-04 e BUG-03 (Médias):** placa `12@` aceita (CT-04); permanência `-30` e `"abc"` viram R$ 0,00 (CT-06). |
 | 5 | **Criar a suíte de testes automatizados** (Jest + Supertest), começando pelos 13 casos marcados como "automatizar" na Ficha 2, e rodar em toda alteração (GitHub Actions). Os CT-05, CT-10, CT-11 e CT-13 entram como testes de regressão dos bugs corrigidos. | Indicador "casos automatizados = 0%" e "taxa de aprovação = 53,8%". Sem testes automáticos, cada correção pode quebrar outra regra sem ninguém perceber. |
