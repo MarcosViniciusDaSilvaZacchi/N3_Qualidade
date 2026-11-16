@@ -20,7 +20,7 @@ planejamento, execução e cobertura de testes de software
 
 Trabalho final apresentado à disciplina de Qualidade de Software (Módulo 3: Testes de Software e Métricas) do curso de Engenharia de Software do Centro Universitário Católica de Santa Catarina, como requisito parcial para a avaliação N3.
 
-Professora: Janaina [SOBRENOME]
+Professora: Janaina Fontana Biffi Duarte
 
 Data de entrega: 23 de novembro de 2026.
 
