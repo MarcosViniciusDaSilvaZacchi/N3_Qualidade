@@ -43,8 +43,8 @@ Para gerar de novo depois de alterar o Markdown (precisa de Node.js e do Microso
 ```powershell
 cd gerador-relatorio
 npm install
-node gerar-docx.js ..Relatorio_Final_N3_Qualidade.md ..Relatorio_Final_N3_Qualidade.docx
-.inalizar-word.ps1 -Docx (Resolve-Path ..Relatorio_Final_N3_Qualidade.docx) -Pdf "$PWD..Relatorio_Final_N3_Qualidade.pdf"
+node gerar-docx.js ..\Relatorio_Final_N3_Qualidade.md ..\Relatorio_Final_N3_Qualidade.docx
+.\finalizar-word.ps1 -Docx (Resolve-Path ..\Relatorio_Final_N3_Qualidade.docx) -Pdf "$PWD\..\Relatorio_Final_N3_Qualidade.pdf"
 ```
 
 O segundo script abre o DOCX no Word, atualiza o sumário e as listas de quadros e tabelas e exporta o PDF.
