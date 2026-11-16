@@ -1,0 +1,8 @@
+{
+  "name": "gerador-relatorio-n3",
+  "private": true,
+  "description": "Gera o DOCX (padrão ABNT) e o PDF do relatório final a partir do Markdown",
+  "dependencies": {
+    "docx": "^9.0.0"
+  }
+}

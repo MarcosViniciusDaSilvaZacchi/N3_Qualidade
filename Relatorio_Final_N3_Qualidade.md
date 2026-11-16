@@ -486,13 +486,13 @@ Os casos de teste foram executados por um script que chama o API Gateway (`http:
 **A.1 CT-05 – Cálculo da tarifa de um carro com 61 minutos (BUG-02)**
 
 ```text
-Requisição:  POST /api/pagamentos/calcular
-             { "movimentacaoId": "1794869216237", "permanenciaMinutos": 61 }
+Requisição: POST /api/pagamentos/calcular
+  { "movimentacaoId": "1794869216237", "permanenciaMinutos": 61 }
 
-Resposta:    HTTP 200
-             { "permanenciaMinutos": 61, "dentroCarencia": false, "valorCalculado": 8,
-               "tabelaAplicada": { "id": "PADRAO_V1", "descricao": "Tabela Padrão Rotativo",
-                                   "valorHora": 8, "carenciaMinutos": 10 } }
+Resposta: HTTP 200
+  { "permanenciaMinutos": 61, "dentroCarencia": false, "valorCalculado": 8,
+    "tabelaAplicada": { "id": "PADRAO_V1", "descricao": "Tabela Padrão Rotativo",
+                        "valorHora": 8, "carenciaMinutos": 10 } }
 ```
 
 Esperado: R$ 15,00 (R$ 10,00 da 1ª hora + R$ 5,00 de uma fração). O sistema cobrou R$ 8,00 pela tabela de R$ 8,00 por hora.
@@ -500,32 +500,32 @@ Esperado: R$ 15,00 (R$ 10,00 da 1ª hora + R$ 5,00 de uma fração). O sistema c
 **A.2 CT-09 – Saída sem pagamento confirmado (trava da cancela funcionando)**
 
 ```text
-Requisição:  POST /api/saidas
-             { "placa": "ABC1D23", "movimentacaoId": "1002" }
+Requisição: POST /api/saidas
+  { "placa": "ABC1D23", "movimentacaoId": "1002" }
 
-Resposta:    HTTP 402
-             { "error": "Para liberar a cancela, conclua primeiro o pagamento do estacionamento." }
+Resposta: HTTP 402
+  { "error": "Para liberar a cancela, conclua primeiro o pagamento do estacionamento." }
 ```
 
 **A.3 CT-10 – Pagamento de R$ 0,01 e saída liberada (BUG-01)**
 
 ```text
-1) Requisição:  GET /api/movimentacoes/aberta?placa=ABC1D23
-   Resposta:    HTTP 200
-                { "id": "1002", "placa": "ABC1D23", "tipo": "ROTATIVO", "status": "ABERTA",
-                  "dataHoraEntrada": "2026-11-16T21:59:48.277Z", "permanenciaMinutos": 47 }
+1) Requisição: GET /api/movimentacoes/aberta?placa=ABC1D23
+   Resposta: HTTP 200
+   { "id": "1002", "placa": "ABC1D23", "tipo": "ROTATIVO", "status": "ABERTA",
+     "dataHoraEntrada": "2026-11-16T21:59:48.277Z", "permanenciaMinutos": 47 }
 
-2) Requisição:  POST /api/pagamentos
-                { "movimentacaoId": "1002", "forma": "DINHEIRO", "valor": 0.01, "valorPago": 0.01 }
-   Resposta:    HTTP 201
-                { "movimentacaoId": "1002", "forma": "DINHEIRO", "valorCalculado": 0.01,
-                  "valorPago": 0.01, "troco": 0, "status": "CONFIRMADO" }
+2) Requisição: POST /api/pagamentos
+   { "movimentacaoId": "1002", "forma": "DINHEIRO", "valor": 0.01, "valorPago": 0.01 }
+   Resposta: HTTP 201
+   { "movimentacaoId": "1002", "forma": "DINHEIRO", "valorCalculado": 0.01,
+     "valorPago": 0.01, "troco": 0, "status": "CONFIRMADO" }
 
-3) Requisição:  POST /api/saidas
-                { "placa": "ABC1D23", "movimentacaoId": "1002", "valorCobrado": 0.01 }
-   Resposta:    HTTP 200
-                { "placa": "ABC1D23", "status": "FINALIZADA", "permanenciaMinutos": 47,
-                  "valorCobrado": 0.01, "mensagem": "Saida registrada com sucesso" }
+3) Requisição: POST /api/saidas
+   { "placa": "ABC1D23", "movimentacaoId": "1002", "valorCobrado": 0.01 }
+   Resposta: HTTP 200
+   { "placa": "ABC1D23", "status": "FINALIZADA", "permanenciaMinutos": 47,
+     "valorCobrado": 0.01, "mensagem": "Saida registrada com sucesso" }
 ```
 
 Um veículo avulso com 47 minutos de pátio teve a saída registrada pagando R$ 0,01. Pela regra do README, o valor devido era R$ 10,00. Pela tabela que o próprio código usa, era R$ 8,00.
