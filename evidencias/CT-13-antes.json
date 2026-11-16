@@ -1,0 +1,53 @@
+{
+  "capturadoEm": "2026-11-16T22:51:42.919Z",
+  "movimentacoes": [
+    {
+      "id": "1000",
+      "placa": "QWE4R56",
+      "status": "FINALIZADA"
+    },
+    {
+      "id": "1001",
+      "placa": "XYZ9K88",
+      "status": "ABERTA"
+    },
+    {
+      "id": "1002",
+      "placa": "ABC1D23",
+      "status": "FINALIZADA"
+    },
+    {
+      "id": "1794869216237",
+      "placa": "BRA2E19",
+      "status": "ABERTA"
+    },
+    {
+      "id": "1794869216301",
+      "placa": "12@",
+      "status": "ABERTA"
+    }
+  ],
+  "pagamentos": [
+    {
+      "id": "9001",
+      "movimentacaoId": "1000",
+      "forma": "PIX",
+      "valor": 16,
+      "status": "CONFIRMADO"
+    },
+    {
+      "id": "1794869216426",
+      "movimentacaoId": "1794869216237",
+      "forma": "DINHEIRO",
+      "valor": 15,
+      "status": "CONFIRMADO"
+    },
+    {
+      "id": "1794869216508",
+      "movimentacaoId": "1002",
+      "forma": "DINHEIRO",
+      "valor": 0.01,
+      "status": "CONFIRMADO"
+    }
+  ]
+}

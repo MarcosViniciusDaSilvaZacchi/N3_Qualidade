@@ -1,0 +1,39 @@
+{
+  "id": "CT-07",
+  "descricao": "F3 dinheiro: devido 15, recebido 20",
+  "executadoEm": "2026-11-16T22:46:56.414Z",
+  "chamadas": [
+    {
+      "requisicao": {
+        "metodo": "POST",
+        "rota": "/pagamentos",
+        "corpo": {
+          "movimentacaoId": "1794869216237",
+          "forma": "DINHEIRO",
+          "valor": 15,
+          "valorPago": 20
+        }
+      },
+      "resposta": {
+        "status": 201,
+        "body": {
+          "id": "1794869216426",
+          "movimentacaoId": "1794869216237",
+          "forma": "DINHEIRO",
+          "valorCalculado": 15,
+          "valor": 15,
+          "valorPago": 20,
+          "troco": 5,
+          "status": "CONFIRMADO",
+          "detalhes": {
+            "tipo": "DINHEIRO",
+            "valorRecebido": 20,
+            "trocoDevolvido": 5
+          },
+          "dataHora": "2026-11-16T22:46:56.426Z",
+          "dataConfirmacao": "2026-11-16T22:46:56.426Z"
+        }
+      }
+    }
+  ]
+}

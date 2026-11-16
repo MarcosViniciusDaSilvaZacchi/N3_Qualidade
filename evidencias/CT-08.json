@@ -1,0 +1,25 @@
+{
+  "id": "CT-08",
+  "descricao": "F3 dinheiro insuficiente: devido 15, recebido 10 (ABC1D23, mov 1002)",
+  "executadoEm": "2026-11-16T22:46:56.431Z",
+  "chamadas": [
+    {
+      "requisicao": {
+        "metodo": "POST",
+        "rota": "/pagamentos",
+        "corpo": {
+          "movimentacaoId": "1002",
+          "forma": "DINHEIRO",
+          "valor": 15,
+          "valorPago": 10
+        }
+      },
+      "resposta": {
+        "status": 400,
+        "body": {
+          "error": "Valor em dinheiro insuficiente. Saldo devido: R$ 15.00, recebido: R$ 10.00"
+        }
+      }
+    }
+  ]
+}

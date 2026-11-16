@@ -1,0 +1,22 @@
+{
+  "id": "CT-02",
+  "descricao": "F1 entrada repetida BRA2E19",
+  "executadoEm": "2026-11-16T22:46:56.247Z",
+  "chamadas": [
+    {
+      "requisicao": {
+        "metodo": "POST",
+        "rota": "/entradas",
+        "corpo": {
+          "placa": "BRA2E19"
+        }
+      },
+      "resposta": {
+        "status": 409,
+        "body": {
+          "error": "Veiculo ja possui entrada aberta"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "id": "CT-09",
+  "descricao": "F3 saida sem pagamento confirmado (ABC1D23, 45 min no patio)",
+  "executadoEm": "2026-11-16T22:46:56.446Z",
+  "chamadas": [
+    {
+      "requisicao": {
+        "metodo": "POST",
+        "rota": "/saidas",
+        "corpo": {
+          "placa": "ABC1D23",
+          "movimentacaoId": "1002"
+        }
+      },
+      "resposta": {
+        "status": 402,
+        "body": {
+          "error": "Para liberar a cancela, conclua primeiro o pagamento do estacionamento."
+        }
+      }
+    },
+    {
+      "requisicao": {
+        "metodo": "GET",
+        "rota": "/movimentacoes/aberta?placa=ABC1D23"
+      },
+      "resposta": {
+        "status": 200,
+        "body": {
+          "id": "1002",
+          "movimentacaoId": "1002",
+          "placa": "ABC1D23",
+          "tipo": "ROTATIVO",
+          "dataHoraEntrada": "2026-11-16T21:59:48.277Z",
+          "horaEntrada": "2026-11-16T21:59:48.277Z",
+          "dataHoraSaida": null,
+          "horaSaida": null,
+          "status": "ABERTA",
+          "origem": "OPERADOR",
+          "autorizado": true,
+          "mensalistaNome": null,
+          "permanenciaMinutos": 47,
+          "minutos": 47,
+          "valorCobrado": 0
+        }
+      }
+    }
+  ]
+}

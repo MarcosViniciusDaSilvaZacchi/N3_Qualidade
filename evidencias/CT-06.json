@@ -1,0 +1,61 @@
+{
+  "id": "CT-06",
+  "descricao": "F2 permanencia com texto \"abc\" e negativa",
+  "executadoEm": "2026-11-16T22:46:56.387Z",
+  "chamadas": [
+    {
+      "requisicao": {
+        "metodo": "POST",
+        "rota": "/pagamentos/calcular",
+        "corpo": {
+          "movimentacaoId": "1794869216237",
+          "permanenciaMinutos": -30
+        }
+      },
+      "resposta": {
+        "status": 200,
+        "body": {
+          "movimentacaoId": "1794869216237",
+          "permanenciaMinutos": -30,
+          "minutos": -30,
+          "dentroCarencia": true,
+          "valorCalculado": 0,
+          "valor": 0,
+          "tabelaAplicada": {
+            "id": "PADRAO_V1",
+            "descricao": "Tabela Padrão Rotativo",
+            "valorHora": 8,
+            "carenciaMinutos": 10
+          }
+        }
+      }
+    },
+    {
+      "requisicao": {
+        "metodo": "POST",
+        "rota": "/pagamentos/calcular",
+        "corpo": {
+          "movimentacaoId": "1794869216237",
+          "permanenciaMinutos": "abc"
+        }
+      },
+      "resposta": {
+        "status": 200,
+        "body": {
+          "movimentacaoId": "1794869216237",
+          "permanenciaMinutos": null,
+          "minutos": null,
+          "dentroCarencia": true,
+          "valorCalculado": 0,
+          "valor": 0,
+          "tabelaAplicada": {
+            "id": "PADRAO_V1",
+            "descricao": "Tabela Padrão Rotativo",
+            "valorHora": 8,
+            "carenciaMinutos": 10
+          }
+        }
+      }
+    }
+  ]
+}

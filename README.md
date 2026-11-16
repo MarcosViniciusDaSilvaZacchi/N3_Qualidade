@@ -15,9 +15,9 @@ planejamento e execução de testes, cobertura dos critérios de aceitação e p
 
 | Item | Resposta |
 |---|---|
-| Nome do projeto | _a definir_ |
-| Disciplina de origem | _a definir_ |
-| Código-fonte | _link_ |
+| Nome do projeto | MY Parking (MY Service Parking) – Sistema de Gestão de Estacionamento |
+| Disciplina de origem | Projeto e Arquitetura de Software |
+| Código-fonte | <https://github.com/MarcosViniciusDaSilvaZacchi/MY_SP> |
 
 ## Estrutura
 

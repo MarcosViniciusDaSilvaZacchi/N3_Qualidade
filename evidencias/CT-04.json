@@ -1,0 +1,36 @@
+{
+  "id": "CT-04",
+  "descricao": "F1 placa em formato invalido \"12@\"",
+  "executadoEm": "2026-11-16T22:46:56.283Z",
+  "chamadas": [
+    {
+      "requisicao": {
+        "metodo": "POST",
+        "rota": "/entradas",
+        "corpo": {
+          "placa": "12@"
+        }
+      },
+      "resposta": {
+        "status": 201,
+        "body": {
+          "id": "1794869216301",
+          "movimentacaoId": "1794869216301",
+          "placa": "12@",
+          "tipo": "ROTATIVO",
+          "dataHoraEntrada": "2026-11-16T22:46:56.301Z",
+          "horaEntrada": "2026-11-16T22:46:56.301Z",
+          "dataHoraSaida": null,
+          "horaSaida": null,
+          "status": "ABERTA",
+          "origem": "OPERADOR",
+          "autorizado": true,
+          "mensalistaNome": null,
+          "permanenciaMinutos": null,
+          "minutos": null,
+          "valorCobrado": 0
+        }
+      }
+    }
+  ]
+}

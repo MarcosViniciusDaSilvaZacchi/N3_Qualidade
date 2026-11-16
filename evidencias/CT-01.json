@@ -1,0 +1,36 @@
+{
+  "id": "CT-01",
+  "descricao": "F1 entrada de carro avulso BRA2E19",
+  "executadoEm": "2026-11-16T22:46:56.081Z",
+  "chamadas": [
+    {
+      "requisicao": {
+        "metodo": "POST",
+        "rota": "/entradas",
+        "corpo": {
+          "placa": "BRA2E19"
+        }
+      },
+      "resposta": {
+        "status": 201,
+        "body": {
+          "id": "1794869216237",
+          "movimentacaoId": "1794869216237",
+          "placa": "BRA2E19",
+          "tipo": "ROTATIVO",
+          "dataHoraEntrada": "2026-11-16T22:46:56.237Z",
+          "horaEntrada": "2026-11-16T22:46:56.237Z",
+          "dataHoraSaida": null,
+          "horaSaida": null,
+          "status": "ABERTA",
+          "origem": "OPERADOR",
+          "autorizado": true,
+          "mensalistaNome": null,
+          "permanenciaMinutos": null,
+          "minutos": null,
+          "valorCobrado": 0
+        }
+      }
+    }
+  ]
+}

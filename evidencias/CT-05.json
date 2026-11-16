@@ -1,0 +1,34 @@
+{
+  "id": "CT-05",
+  "descricao": "F2 tarifa carro 61 min",
+  "executadoEm": "2026-11-16T22:46:56.307Z",
+  "chamadas": [
+    {
+      "requisicao": {
+        "metodo": "POST",
+        "rota": "/pagamentos/calcular",
+        "corpo": {
+          "movimentacaoId": "1794869216237",
+          "permanenciaMinutos": 61
+        }
+      },
+      "resposta": {
+        "status": 200,
+        "body": {
+          "movimentacaoId": "1794869216237",
+          "permanenciaMinutos": 61,
+          "minutos": 61,
+          "dentroCarencia": false,
+          "valorCalculado": 8,
+          "valor": 8,
+          "tabelaAplicada": {
+            "id": "PADRAO_V1",
+            "descricao": "Tabela Padrão Rotativo",
+            "valorHora": 8,
+            "carenciaMinutos": 10
+          }
+        }
+      }
+    }
+  ]
+}

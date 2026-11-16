@@ -1,0 +1,97 @@
+{
+  "id": "CT-10",
+  "descricao": "F3 pagamento com valor adulterado R$0,01 e saida (ABC1D23)",
+  "executadoEm": "2026-11-16T22:46:56.486Z",
+  "chamadas": [
+    {
+      "requisicao": {
+        "metodo": "GET",
+        "rota": "/movimentacoes/aberta?placa=ABC1D23"
+      },
+      "resposta": {
+        "status": 200,
+        "body": {
+          "id": "1002",
+          "movimentacaoId": "1002",
+          "placa": "ABC1D23",
+          "tipo": "ROTATIVO",
+          "dataHoraEntrada": "2026-11-16T21:59:48.277Z",
+          "horaEntrada": "2026-11-16T21:59:48.277Z",
+          "dataHoraSaida": null,
+          "horaSaida": null,
+          "status": "ABERTA",
+          "origem": "OPERADOR",
+          "autorizado": true,
+          "mensalistaNome": null,
+          "permanenciaMinutos": 47,
+          "minutos": 47,
+          "valorCobrado": 0
+        }
+      }
+    },
+    {
+      "requisicao": {
+        "metodo": "POST",
+        "rota": "/pagamentos",
+        "corpo": {
+          "movimentacaoId": "1002",
+          "forma": "DINHEIRO",
+          "valor": 0.01,
+          "valorPago": 0.01
+        }
+      },
+      "resposta": {
+        "status": 201,
+        "body": {
+          "id": "1794869216508",
+          "movimentacaoId": "1002",
+          "forma": "DINHEIRO",
+          "valorCalculado": 0.01,
+          "valor": 0.01,
+          "valorPago": 0.01,
+          "troco": 0,
+          "status": "CONFIRMADO",
+          "detalhes": {
+            "tipo": "DINHEIRO",
+            "valorRecebido": 0.01,
+            "trocoDevolvido": 0
+          },
+          "dataHora": "2026-11-16T22:46:56.508Z",
+          "dataConfirmacao": "2026-11-16T22:46:56.508Z"
+        }
+      }
+    },
+    {
+      "requisicao": {
+        "metodo": "POST",
+        "rota": "/saidas",
+        "corpo": {
+          "placa": "ABC1D23",
+          "movimentacaoId": "1002",
+          "valorCobrado": 0.01
+        }
+      },
+      "resposta": {
+        "status": 200,
+        "body": {
+          "id": "1002",
+          "movimentacaoId": "1002",
+          "placa": "ABC1D23",
+          "tipo": "ROTATIVO",
+          "dataHoraEntrada": "2026-11-16T21:59:48.277Z",
+          "horaEntrada": "2026-11-16T21:59:48.277Z",
+          "dataHoraSaida": "2026-11-16T22:46:56.524Z",
+          "horaSaida": "2026-11-16T22:46:56.524Z",
+          "status": "FINALIZADA",
+          "origem": "OPERADOR",
+          "autorizado": true,
+          "mensalistaNome": null,
+          "permanenciaMinutos": 47,
+          "minutos": 47,
+          "valorCobrado": 0.01,
+          "mensagem": "Saida registrada com sucesso"
+        }
+      }
+    }
+  ]
+}
