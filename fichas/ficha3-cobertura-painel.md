@@ -44,7 +44,7 @@ Cobertura alta não quer dizer sistema aprovado. Todos os critérios estão test
 
    **Não, e não.** Chegamos a 100% de cobertura e o sistema continua com 5 bugs abertos, 2 deles críticos.
 
-   - **Cobertura de critérios não é ausência de bugs.** Cada critério foi verificado com poucos valores, e testes só mostram a presença de defeitos, nunca a ausência. O BUG-01 (pagar R$ 0,01 e sair) está dentro da F3, mas os testes "normais" do critério passavam. Ele só apareceu quando tentamos usar o sistema de um jeito que o critério não descrevia.
+   - **Cobertura de critérios não é ausência de bugs.** Cada critério foi verificado com poucos valores, e testes só mostram a presença de defeitos, nunca a ausência (DIJKSTRA, 1972). O BUG-01 (pagar R$ 0,01 e sair) está dentro da F3, mas os testes "normais" do critério passavam. Ele só apareceu quando tentamos usar o sistema de um jeito que o critério não descrevia.
    - **Também existem requisitos que nenhum critério cobre.** É o caso da persistência dos dados (BUG-05) e da validação no back-end (BUG-03 e BUG-04).
    - **Cobertura de critérios não é cobertura de código.** Os critérios dizem o que o cliente pediu, não quais linhas foram executadas. Nada testou a validação de cartão (algoritmo de Luhn), os relatórios em PDF e Excel, a gestão de vagas, os mensalistas ou o login. Medir a cobertura de código exige uma ferramenta própria (por exemplo, `jest --coverage` ou `c8`), que mostra quais linhas e desvios (`if`/`else`) foram executados. E mesmo 100% de linhas executadas não garante que os resultados foram conferidos.
 
