@@ -8,8 +8,7 @@ planejamento e execução de testes, cobertura dos critérios de aceitação e p
 ## Integrantes
 
 - Marcos Vinicius da Silva Zacchi
-- _a definir_
-- _a definir_
+- Yan Carlos Farias
 
 ## Projeto analisado
 

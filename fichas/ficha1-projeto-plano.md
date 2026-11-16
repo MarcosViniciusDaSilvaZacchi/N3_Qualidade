@@ -1,6 +1,6 @@
 # Ficha 1 · Projeto e plano de testes
 
-**Integrantes:** Marcos Vinicius da Silva Zacchi, _a definir_, _a definir_
+**Integrantes:** Marcos Vinicius da Silva Zacchi, Yan Carlos Farias
 
 ## A. Sobre o projeto
 
