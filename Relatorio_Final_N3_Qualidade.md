@@ -51,7 +51,7 @@ Quadro 9 – Decisão entre teste manual e automatizado \
 Quadro 10 – Matriz de cobertura dos critérios de aceitação \
 Quadro 11 – Painel de qualidade \
 Quadro 12 – Recomendações ao cliente \
-Quadro 13 – Arquivos de evidência
+Quadro 13 – Registros antes e depois do reinício do sistema (CT-13)
 
 <!-- QUEBRA -->
 
@@ -94,7 +94,7 @@ Tabela 2 – Síntese dos resultados
 6.1 Síntese dos resultados \
 6.2 Aprendizados \
 REFERÊNCIAS \
-APÊNDICE A – EVIDÊNCIAS E REPRODUÇÃO DOS TESTES
+APÊNDICE A – EXEMPLOS DE EVIDÊNCIAS DOS TESTES
 
 <!-- QUEBRA -->
 
@@ -124,7 +124,7 @@ O sistema é feito em JavaScript. São cinco microsserviços em Node.js e Expres
 - A seção 2 descreve a metodologia.
 - As seções 3, 4 e 5 apresentam as três fichas do trabalho, na ordem em que foram feitas: projeto e plano de testes, casos de teste e bugs, e cobertura e recomendações.
 - A seção 6 traz a síntese dos resultados e os aprendizados.
-- O Apêndice A explica como reproduzir os testes.
+- O Apêndice A traz exemplos das evidências registradas na execução dos testes.
 
 No texto, **CT-XX** identifica um caso de teste e **BUG-XX** um bug registrado. **F1-C1** significa "Funcionalidade 1, Critério 1".
 
@@ -217,7 +217,7 @@ Fonte: elaborado pelos autores (2026).
 | Item | Definição |
 |---|---|
 | Ambiente | Notebook Windows 10 com Node.js 23. Sistema iniciado localmente com `node iniciar.js` (5 microsserviços + Gateway + front-end), com os dados de exemplo que o próprio sistema cria ao iniciar. |
-| Ferramentas | Navegador para os testes de sistema. Script Node.js (`fetch`) chamando o API Gateway para os testes de integração e as evidências em JSON. Leitura do código-fonte para localizar a causa dos bugs. |
+| Ferramentas | Navegador para os testes de sistema. Script Node.js (`fetch`) chamando o API Gateway para os testes de integração, com o registro da requisição e da resposta de cada caso. Leitura do código-fonte para localizar a causa dos bugs. |
 | Usuário de teste | `operador@myparking.com` (perfil Operador), que é o usuário do dia a dia. O Admin fica para os relatórios. |
 | Dentro do escopo | Entrada, cálculo de tarifa, pagamento (dinheiro e PIX) e liberação da cancela. |
 | Fora do escopo | Relatórios PDF/Excel, gestão de vagas, cadastro de mensalistas e de usuários, desempenho e carga. Esses itens ficam como sugestão para uma próxima rodada. |
@@ -251,7 +251,7 @@ Como o cliente recebeu a promessa do README, a cobrança feita pelo código é t
 
 ### 4.1 Casos de teste
 
-**Como foi executado (16/11/2026):** o sistema foi iniciado com `node iniciar.js`, e os casos foram chamados pelo API Gateway (`http://localhost:3000/api`), logado como `operador@myparking.com`. O script está em [evidencias/executar-casos.js](evidencias/executar-casos.js). A requisição e a resposta completas de cada caso estão em `evidencias/CT-XX.json`. O veículo `ABC1D23` (movimentação `1002`, com entrada 45 min antes do início do sistema) vem nos dados de exemplo do próprio sistema. Por isso dá para testar a saída sem esperar o tempo passar.
+**Como foi executado (16/11/2026):** o sistema foi iniciado com `node iniciar.js`, e os casos foram chamados pelo API Gateway (`http://localhost:3000/api`), logado como `operador@myparking.com`. Um script registrou a requisição e a resposta completas de cada caso. O Apêndice A traz exemplos desses registros. O veículo `ABC1D23` (movimentação `1002`, com entrada 45 min antes do início do sistema) vem nos dados de exemplo do próprio sistema. Por isso dá para testar a saída sem esperar o tempo passar.
 
 **Quadro 6 – Casos de teste CT-01 a CT-10**
 
@@ -274,7 +274,7 @@ Fonte: elaborado pelos autores (2026).
 
 #### 4.1.1 Casos complementares (criados na Ficha 3)
 
-Os casos CT-11 e CT-12 foram criados para os critérios que ficaram sem cobertura na análise da Ficha 3. O CT-13 foi um teste exploratório sobre o risco de perda de dados apontado na Ficha 1. Os três foram executados depois de reiniciar o sistema, com o script [evidencias/executar-casos-ficha3.js](evidencias/executar-casos-ficha3.js).
+Os casos CT-11 e CT-12 foram criados para os critérios que ficaram sem cobertura na análise da Ficha 3. O CT-13 foi um teste exploratório sobre o risco de perda de dados apontado na Ficha 1. Os três foram executados depois de reiniciar o sistema.
 
 **Quadro 7 – Casos de teste complementares CT-11 a CT-13**
 
@@ -282,7 +282,7 @@ Os casos CT-11 e CT-12 foram criados para os critérios que ficaram sem cobertur
 |---|---|---|---|---|---|---|---|
 | CT-11 | F2 – Tarifa de moto | Operador logado. Caminhão não é testado porque o cliente não recebe caminhões. | Enviar `POST /pagamentos/calcular` duas vezes, informando `tipoVeiculo` = `MOTO`. | moto, permanência = 61 min e permanência = 130 min | 61 min: R$ 7,50 (0,5 × R$ 15,00). 130 min: R$ 10,00 (0,5 × R$ 20,00). | **R$ 8,00 e R$ 16,00, os mesmos valores de um carro.** O porte é ignorado, e a entrada (`POST /entradas`) nem tem campo para dizer se é carro ou moto. | **Não** |
 | CT-12 | F3 – PIX pendente | Sistema recém-iniciado. `ABC1D23` (mov. 1002) há 45 min no pátio, sem pagamento. | 1. Gerar a cobrança PIX (`iniciarPix: true`). 2. Tentar a saída. 3. Confirmar o PIX. 4. Tentar a saída de novo. | mov. = `1002`, forma = `PIX` | Passo 2: HTTP 402, pedindo a confirmação do PIX. Passo 4: HTTP 200, saída `FINALIZADA`. | Passo 1: PIX `PENDENTE`. Passo 2: HTTP 402, "Para liberar a saída, confirme primeiro o recebimento do pagamento PIX". Passo 4: HTTP 200, `FINALIZADA`. Obs.: o valor cobrado foi R$ 8,00 em vez de R$ 10,00 (BUG-02). | Sim |
-| CT-13 | Todas – Persistência | CT-01 a CT-10 executados (entrada `BRA2E19`, placa `12@` e pagamentos de CT-07 e CT-10 gravados). Retrato dos dados guardado em `CT-13-antes.json`. | 1. Parar todos os serviços. 2. Iniciar de novo (`node iniciar.js`). 3. Listar entradas e pagamentos. | — | Os registros feitos antes do reinício continuam lá. O README diz que cada serviço grava em SQLite. | **Todos os registros sumiram.** Só sobraram os 3 veículos e o 1 pagamento de exemplo, que o sistema cria ao iniciar. | **Não** |
+| CT-13 | Todas – Persistência | CT-01 a CT-10 executados (entrada `BRA2E19`, placa `12@` e pagamentos de CT-07 e CT-10 gravados). Lista de entradas e pagamentos registrada antes do reinício. | 1. Parar todos os serviços. 2. Iniciar de novo (`node iniciar.js`). 3. Listar entradas e pagamentos. | — | Os registros feitos antes do reinício continuam lá. O README diz que cada serviço grava em SQLite. | **Todos os registros sumiram.** Só restaram os dados de exemplo que o sistema cria ao iniciar (3 veículos e 1 pagamento), além do pagamento do CT-12, feito depois do reinício. | **Não** |
 
 Fonte: elaborado pelos autores (2026).
 
@@ -300,7 +300,7 @@ Gravidade: **Crítica** (impede o uso ou perde dados) · **Alta** (resultado err
 | BUG-02 | CT-05, CT-11, CT-12 | A tarifa ativa é a `TarifaPadraoStrategy`: R$ 8,00 por hora com 10 min de carência, e o porte do veículo é ignorado. 61 min custam R$ 8,00 tanto para carro quanto para moto. A entrada nem registra se o veículo é carro ou moto. A própria documentação do projeto traz três regras diferentes (README, entrega N1 e `docs/api-contracts.md`). | Seguir a regra prometida no README §4.3: R$ 10,00 na 1ª hora + R$ 5,00 por hora ou fração, e moto pagando metade. Exemplos: carro 61 min = R$ 15,00, moto 61 min = R$ 7,50. | `POST /api/pagamentos/calcular` com `{permanenciaMinutos:61}` → `valorCalculado: 8`. Com `tipoVeiculo:"MOTO"`, também `8`. | **Alta** |
 | BUG-03 | CT-06 | Permanência negativa (`-30`) ou em texto (`"abc"`) é aceita e devolve R$ 0,00 como se estivesse dentro da carência. | Recusar com HTTP 400 e avisar que a permanência é inválida. | `POST /api/pagamentos/calcular` com `{permanenciaMinutos:"abc"}` → HTTP 200, `valorCalculado: 0`. | Média |
 | BUG-04 | CT-04 | O back-end aceita qualquer placa. A placa `12@` foi registrada com entrada aberta. A tela só confere se a placa tem 7 caracteres (`EntradaView.vue`, linha 50), então até `1234567` passa. | Validar no back-end os padrões `ABC1234` e `ABC1D23`, como o README promete. | `POST /api/entradas` com `{placa:"12@"}` → HTTP 201. | Média |
-| BUG-05 | CT-13 | Todos os dados se perdem quando os serviços são reiniciados: entradas, saídas, pagamentos, mensalistas, vagas e operadores cadastrados. Os cinco microsserviços usam `InMemory*Repository`, por exemplo `estacionamento-service/src/routes/index.js`, linha 13. O README promete SQLite com um banco por serviço. | Gravar os dados em um banco (o SQLite prometido) para que sobrevivam a um reinício, uma queda de energia ou uma atualização. | 1. Registrar uma entrada. 2. Parar e iniciar o sistema. 3. `GET /api/entradas` → a entrada não existe mais (compare `CT-13-antes.json` com `CT-13.json`). | **Crítica** (perda de dados, inclusive do histórico financeiro) |
+| BUG-05 | CT-13 | Todos os dados se perdem quando os serviços são reiniciados: entradas, saídas, pagamentos, mensalistas, vagas e operadores cadastrados. Os cinco microsserviços usam `InMemory*Repository`, por exemplo `estacionamento-service/src/routes/index.js`, linha 13. O README promete SQLite com um banco por serviço. | Gravar os dados em um banco (o SQLite prometido) para que sobrevivam a um reinício, uma queda de energia ou uma atualização. | 1. Registrar uma entrada. 2. Parar e iniciar o sistema. 3. `GET /api/entradas` → a entrada não existe mais (ver o Quadro 13, no Apêndice A). | **Crítica** (perda de dados, inclusive do histórico financeiro) |
 
 Fonte: elaborado pelos autores (2026).
 
@@ -328,7 +328,7 @@ Fonte: elaborado pelos autores (2026).
 
 Fonte: elaborado pelos autores (2026).
 
-**Conclusão:** os 13 casos devem ser automatizados. Em 11 deles a automação é completa. No CT-07 e no CT-12 só a regra é automatizada, e a conferência visual do recibo e do QR Code continua manual. Hoje o projeto não tem nenhum teste automatizado (nenhum `package.json` tem script `test`). Os scripts `evidencias/executar-casos*.js` deste trabalho são um primeiro passo, mas ainda dependem de o sistema estar rodando e não conferem os resultados sozinhos.
+**Conclusão:** os 13 casos devem ser automatizados. Em 11 deles a automação é completa. No CT-07 e no CT-12 só a regra é automatizada, e a conferência visual do recibo e do QR Code continua manual. Hoje o projeto não tem nenhum teste automatizado (nenhum `package.json` tem script `test`). Os scripts usados neste trabalho para executar os casos são um primeiro passo, mas ainda dependem de o sistema estar rodando e não conferem os resultados sozinhos.
 
 <!-- QUEBRA -->
 
@@ -352,7 +352,7 @@ Cobertura = critérios cobertos ÷ total de critérios × 100. Para cada critér
 
 Fonte: elaborado pelos autores (2026).
 
-Os casos CT-11 e CT-12 estão completos, no formato da Ficha 2, na subseção 4.1.1. As evidências estão em `evidencias/CT-11.json` e `evidencias/CT-12.json`.
+Os casos CT-11 e CT-12 estão completos, no formato da Ficha 2, na subseção 4.1.1.
 
 **Tabela 1 – Resumo da cobertura dos critérios de aceitação**
 
@@ -468,25 +468,68 @@ ZACCHI, Marcos Vinicius da Silva; FARIAS, Yan Carlos. **MY Parking**: sistema de
 
 <!-- QUEBRA -->
 
-## APÊNDICE A – EVIDÊNCIAS E REPRODUÇÃO DOS TESTES
+## APÊNDICE A – EXEMPLOS DE EVIDÊNCIAS DOS TESTES
 
-As evidências ficam na pasta `evidencias/` do repositório do trabalho. O Quadro 13 descreve os arquivos.
+Os casos de teste foram executados por um script que chama o API Gateway (`http://localhost:3000/api`) com o token de um operador logado. Para cada caso, o script registrou a data e a hora, a requisição enviada (método, rota e corpo) e a resposta recebida (código HTTP e corpo). Este apêndice reproduz os registros dos casos que comprovam os principais bugs. Para facilitar a leitura, as respostas mostram só os campos relevantes.
 
-**Quadro 13 – Arquivos de evidência**
+**A.1 CT-05 – Cálculo da tarifa de um carro com 61 minutos (BUG-02)**
 
-| Arquivo | Conteúdo |
-|---|---|
-| `CT-01.json` a `CT-12.json` | Para cada caso: data e hora da execução, cada requisição enviada (método, rota e corpo) e a resposta recebida (código HTTP e corpo). |
-| `CT-13-antes.json` e `CT-13.json` | Dados do sistema antes e depois do reinício, que comprovam a perda de dados (BUG-05). |
-| `executar-casos.js` | Script que executa os casos CT-01 a CT-10. |
-| `executar-casos-ficha3.js` | Script que executa os casos CT-11 a CT-13 (com `CT-11` como segundo argumento, executa só o CT-11). |
+```text
+Requisição:  POST /api/pagamentos/calcular
+             { "movimentacaoId": "1794869216237", "permanenciaMinutos": 61 }
+
+Resposta:    HTTP 200
+             { "permanenciaMinutos": 61, "dentroCarencia": false, "valorCalculado": 8,
+               "tabelaAplicada": { "id": "PADRAO_V1", "descricao": "Tabela Padrão Rotativo",
+                                   "valorHora": 8, "carenciaMinutos": 10 } }
+```
+
+Esperado: R$ 15,00 (R$ 10,00 da 1ª hora + R$ 5,00 de uma fração). O sistema cobrou R$ 8,00 pela tabela de R$ 8,00 por hora.
+
+**A.2 CT-09 – Saída sem pagamento confirmado (trava da cancela funcionando)**
+
+```text
+Requisição:  POST /api/saidas
+             { "placa": "ABC1D23", "movimentacaoId": "1002" }
+
+Resposta:    HTTP 402
+             { "error": "Para liberar a cancela, conclua primeiro o pagamento do estacionamento." }
+```
+
+**A.3 CT-10 – Pagamento de R$ 0,01 e saída liberada (BUG-01)**
+
+```text
+1) Requisição:  GET /api/movimentacoes/aberta?placa=ABC1D23
+   Resposta:    HTTP 200
+                { "id": "1002", "placa": "ABC1D23", "tipo": "ROTATIVO", "status": "ABERTA",
+                  "dataHoraEntrada": "2026-11-16T21:59:48.277Z", "permanenciaMinutos": 47 }
+
+2) Requisição:  POST /api/pagamentos
+                { "movimentacaoId": "1002", "forma": "DINHEIRO", "valor": 0.01, "valorPago": 0.01 }
+   Resposta:    HTTP 201
+                { "movimentacaoId": "1002", "forma": "DINHEIRO", "valorCalculado": 0.01,
+                  "valorPago": 0.01, "troco": 0, "status": "CONFIRMADO" }
+
+3) Requisição:  POST /api/saidas
+                { "placa": "ABC1D23", "movimentacaoId": "1002", "valorCobrado": 0.01 }
+   Resposta:    HTTP 200
+                { "placa": "ABC1D23", "status": "FINALIZADA", "permanenciaMinutos": 47,
+                  "valorCobrado": 0.01, "mensagem": "Saida registrada com sucesso" }
+```
+
+Um veículo avulso com 47 minutos de pátio teve a saída registrada pagando R$ 0,01. Pela regra do README, o valor devido era R$ 10,00. Pela tabela que o próprio código usa, era R$ 8,00.
+
+**A.4 CT-13 – Registros antes e depois do reinício do sistema (BUG-05)**
+
+A primeira lista foi obtida às 22:51 de 16/11/2026, depois dos casos CT-01 a CT-10. Em seguida, todos os serviços foram parados e iniciados de novo. A segunda lista foi obtida às 22:53, logo depois do CT-12, que foi executado após o reinício.
+
+**Quadro 13 – Registros antes e depois do reinício do sistema (CT-13)**
+
+| Registro | Antes do reinício | Depois do reinício |
+|---|---|---|
+| Movimentações | 5: `QWE4R56`, `XYZ9K88` e `ABC1D23` (exemplos do sistema), `BRA2E19` (CT-01) e `12@` (CT-04) | 3: só `QWE4R56`, `XYZ9K88` e `ABC1D23` (exemplos do sistema) |
+| Pagamentos | 3: exemplo do sistema (PIX, R$ 16,00), CT-07 (dinheiro, R$ 15,00) e CT-10 (dinheiro, R$ 0,01) | 2: exemplo do sistema (PIX, R$ 16,00) e o PIX do CT-12 (R$ 8,00), feito depois do reinício |
 
 Fonte: elaborado pelos autores (2026).
 
-Para reproduzir os testes:
-
-1. Clonar o projeto (`git clone https://github.com/MarcosViniciusDaSilvaZacchi/MY_SP`) e, na pasta dele, executar `node iniciar.js`. Isso instala as dependências e sobe os 7 processos.
-2. Em outro terminal, na pasta do trabalho, executar `node evidencias/executar-casos.js evidencias`.
-3. Para os casos complementares: parar o sistema, iniciá-lo de novo (o CT-12 precisa dos dados de exemplo no estado inicial) e executar `node evidencias/executar-casos-ficha3.js evidencias`.
-
-Os identificadores das movimentações e os horários mudam a cada execução. Os códigos HTTP, os valores e os status devem ser os mesmos registrados nas fichas.
+As entradas dos CT-01 e CT-04 e os pagamentos dos CT-07 e CT-10 desapareceram. O sistema voltou aos dados de exemplo que cria ao iniciar, o que confirma que nada é gravado em banco de dados.
